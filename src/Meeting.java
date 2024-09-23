@@ -20,19 +20,24 @@ public class Meeting extends Event implements Completable {
     public boolean isComplete() {
         return complete;
     }
+    // Getter for the end time of the meeting
     public LocalDateTime getEndDateTime() {
         return endDateTime;
     }
+    //Getter for the duration of the meeting
     public Duration getDuration() {
         return Duration.between(getDateTime(), endDateTime);
     }
+    //Getter for the meeting location
     public String getLocation() {
         return location;
     }
+    //Setter for the meeting location
     public void setLocation(String location) {
         this.location = location;
     }
-    public void setEndTime(LocalDateTime endDateTime) {
+    //Setter for the end time of the meeting
+    public void setEndDateTime(LocalDateTime endDateTime) {
         this.endDateTime = endDateTime;
     }
 

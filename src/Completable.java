@@ -1,4 +1,9 @@
+/*
+Methods below are implemented in the
+Deadline.java and Meeting.java classes
+ */
+
 public interface Completable {
-    public void complete();
-    public boolean isComplete();
+    void complete();
+    boolean isComplete();
 }
