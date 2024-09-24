@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class EventListPanel extends JPanel {
     //Private variable declaration
-    private ArrayList<Event> events;
+    private ArrayList<Event> events = new ArrayList<>();
     public JPanel controlPanel;
     public JPanel displayPanel;
     private JComboBox<String> sortDropDown;
@@ -73,12 +73,16 @@ public class EventListPanel extends JPanel {
         this.add(displayPanel);
 
     }
+    public void addEvent(Event event) {
+        events.add(event);
+        updateDisplay();
+    }
     public boolean isFiltered(Event event) {
         for (JCheckBox checkBox : filters) {
             if (checkBox.isSelected()) {
                 switch(checkBox.getText()) {
                     case "Remove Complete Tasks":
-                        if (!event.isComplete())
+                        if (event.isComplete())
                             return true;
                         break;
                     case "Deadlines":

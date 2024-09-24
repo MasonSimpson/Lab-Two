@@ -26,11 +26,8 @@ public class EventPlanner {
         //Creates a meeting and deadline object
         Deadline deadline = new Deadline(deadlineName, deadlineDateTime);
         Meeting meeting = new Meeting(meetingName, meetingStartDateTime, meetingEndDateTime, meetingLocation);
-        //Creates two EventPanels for the meeting and deadline objects
-        EventPanel deadlinePanel = new EventPanel(deadline);
-        EventPanel meetingPanel = new EventPanel(meeting);
-        //Adds those event panels to the EventListPanel
-        events.displayPanel.add(deadlinePanel);
-        events.displayPanel.add(meetingPanel);
+        //Adds the deadline and meeting objects to the ArrayList so that it can work with filters
+        events.addEvent(deadline);
+        events.addEvent(meeting);
     }
 }
