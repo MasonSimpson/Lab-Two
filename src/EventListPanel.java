@@ -3,6 +3,7 @@ import javax.swing.*;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.ArrayList;
+import java.util.Comparator;
 
 public class EventListPanel extends JPanel {
     //Private variable declaration
@@ -42,7 +43,21 @@ public class EventListPanel extends JPanel {
         sortDropDown = new JComboBox(SORT_OPTIONS);
         sortDropDown.setFont(new Font("Serif", Font.BOLD, 30));
         sortDropDown.addActionListener(e -> {
-            //Insert code for drop down sorting here
+            switch (sortDropDown.getSelectedItem().toString()) {
+                case "ALPHABETICAL":
+                    events.sort(Comparator.comparing(Event::getName));
+                    break;
+                case "DATE":
+                    events.sort(Comparator.comparing(Event::getDateTime));
+                    break;
+                case "REVERSE_ALPHABETICAL":
+                    events.sort(Comparator.comparing(Event::getName).reversed());
+                    break;
+                case "REVERSE_DATE":
+                    events.sort(Comparator.comparing(Event::getDateTime).reversed());
+                    break;
+            }
+            updateDisplay();
         });
         controlPanel.add(sortDropDown);
 
@@ -86,10 +101,12 @@ public class EventListPanel extends JPanel {
                             return true;
                         break;
                     case "Deadlines":
-                        //Code for deadlines here
+                        if (event instanceof Deadline)
+                            return true;
                         break;
                     case "Meetings":
-                        //Code for meetings here
+                        if (event instanceof Meeting)
+                            return true;
                         break;
                 }
             }
