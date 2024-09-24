@@ -55,7 +55,7 @@ public class EventListPanel extends JPanel {
             checkBox.addItemListener(new ItemListener() {
                 @Override
                 public void itemStateChanged(ItemEvent e) {
-                    //Add code for updating items based on check box here
+                    updateDisplay();
                 }
             });
             filters.add(checkBox);
@@ -72,5 +72,33 @@ public class EventListPanel extends JPanel {
         this.add(controlPanel);
         this.add(displayPanel);
 
+    }
+    public boolean isFiltered(Event event) {
+        for (JCheckBox checkBox : filters) {
+            if (checkBox.isSelected()) {
+                switch(checkBox.getText()) {
+                    case "Remove Complete Tasks":
+                        if (!event.isComplete())
+                            return true;
+                        break;
+                    case "Deadlines":
+                        //Code for deadlines here
+                        break;
+                    case "Meetings":
+                        //Code for meetings here
+                        break;
+                }
+            }
+        }
+        return false;
+    }
+    public void updateDisplay() {
+        displayPanel.removeAll();
+        for (Event event : events) {
+            if (!isFiltered(event))
+                displayPanel.add(new EventPanel(event));
+        }
+        revalidate();
+        repaint();
     }
 }

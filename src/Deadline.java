@@ -14,6 +14,7 @@ public class Deadline extends Event implements Completable{
         complete = true;
     }
     //Returns whether the task this deadline tracks is complete
+    @Override
     public boolean isComplete() {
         return complete;
     }

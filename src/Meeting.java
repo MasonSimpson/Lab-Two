@@ -19,6 +19,7 @@ public class Meeting extends Event implements Completable {
         complete = true;
     }
     //Returns whether the meeting is complete
+    @Override
     public boolean isComplete() {
         return complete;
     }

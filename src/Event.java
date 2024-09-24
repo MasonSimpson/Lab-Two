@@ -28,6 +28,9 @@ public abstract class Event implements Comparable<Event> {
         displayString.add(getDateTime().toString());
         return displayString;
     }
+    public boolean isComplete(){
+        return true;
+    }
     public void complete() {}
     /* Takes an event,'e', and
        Compares it with 'this' dateTime variable
