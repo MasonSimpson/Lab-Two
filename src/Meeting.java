@@ -1,4 +1,5 @@
 import java.time.*;
+import java.util.ArrayList;
 
 public class Meeting extends Event implements Completable {
     // Private variable declaration
@@ -13,6 +14,7 @@ public class Meeting extends Event implements Completable {
         this.endDateTime = end;
     }
     //Indicates the meeting is complete when called
+   @Override
     public void complete() {
         complete = true;
     }
@@ -39,6 +41,16 @@ public class Meeting extends Event implements Completable {
     //Setter for the end time of the meeting
     public void setEndDateTime(LocalDateTime endDateTime) {
         this.endDateTime = endDateTime;
+    }
+    @Override
+    public ArrayList<String> getDisplayString() {
+        ArrayList<String> displayString = new ArrayList<>();
+        displayString.add("Event Name: " + this.getName());
+        displayString.add("Date and Time: " + this.getDateTime().toString());
+        displayString.add("Location: " + this.getLocation());
+        displayString.add("Duration: " + this.getDuration().toString());
+        displayString.add("Completion Status: " + this.isComplete());
+        return displayString;
     }
 
 }

@@ -1,4 +1,5 @@
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 public abstract class Event implements Comparable<Event> {
     //Private variable declaration
@@ -20,6 +21,14 @@ public abstract class Event implements Comparable<Event> {
     public void setDateTime(LocalDateTime dateTime) {
         this.dateTime = dateTime;
     }
+    //Returns a String format of information for the EventPanel
+    public ArrayList<String> getDisplayString() {
+        ArrayList<String> displayString = new ArrayList<>();
+        displayString.add(getName());
+        displayString.add(getDateTime().toString());
+        return displayString;
+    }
+    public void complete() {}
     /* Takes an event,'e', and
        Compares it with 'this' dateTime variable
        Returns an int based on the result of the comparison
