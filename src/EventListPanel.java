@@ -35,7 +35,7 @@ public class EventListPanel extends JPanel {
         addEventButton = new JButton("Add Event");
         addEventButton.setFont(new Font("Serif", Font.BOLD, 30));
         addEventButton.addActionListener(e -> {
-            //insert code for AddEventModal here
+            new AddEventModal(this);
         });
         controlPanel.add(addEventButton);
 
@@ -88,8 +88,14 @@ public class EventListPanel extends JPanel {
         this.add(displayPanel);
 
     }
+    //Adds an event to the ArrayList and then calls updateDisplay()
     public void addEvent(Event event) {
         events.add(event);
+        updateDisplay();
+    }
+    //Removes an event from the ArrayList and then calls updateDisplay()
+    public void removeEvent(Event event) {
+        events.remove(event);
         updateDisplay();
     }
     public boolean isFiltered(Event event) {
@@ -116,8 +122,11 @@ public class EventListPanel extends JPanel {
     public void updateDisplay() {
         displayPanel.removeAll();
         for (Event event : events) {
-            if (!isFiltered(event))
-                displayPanel.add(new EventPanel(event));
+            if (!isFiltered(event)) {
+                EventPanel eventPanel = new EventPanel(event);
+                eventPanel.setParentPanel(this);
+                displayPanel.add(eventPanel);
+            }
         }
         revalidate();
         repaint();
