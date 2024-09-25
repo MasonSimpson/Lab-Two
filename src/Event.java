@@ -28,9 +28,12 @@ public abstract class Event implements Comparable<Event> {
         displayString.add(getDateTime().toString());
         return displayString;
     }
+    //This method is overriden in Meeting.java and Deadline.java
+    //I just needed a simple version of it here
     public boolean isComplete(){
         return true;
     }
+    //This method is overridden in Meeting.java and Deadline.java
     public void complete() {}
     /* Takes an event,'e', and
        Compares it with 'this' dateTime variable
