@@ -40,7 +40,7 @@ public class EventListPanel extends JPanel {
         controlPanel.add(addEventButton);
 
         //Dropbox for sorting the events
-        sortDropDown = new JComboBox(SORT_OPTIONS);
+        sortDropDown = new JComboBox<>(SORT_OPTIONS);
         sortDropDown.setFont(new Font("Serif", Font.BOLD, 30));
         sortDropDown.addActionListener(e -> {
             switch (sortDropDown.getSelectedItem().toString()) {
