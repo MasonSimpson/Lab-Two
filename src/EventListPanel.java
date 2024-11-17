@@ -8,6 +8,7 @@ import java.util.Comparator;
 public class EventListPanel extends JPanel {
     //Private variable declaration
     private ArrayList<Event> events = new ArrayList<>();
+    private SortStrategy sortStrategy = new AlphabeticalSort(); // Sorting alphabetically by default
     public JPanel controlPanel;
     public JPanel displayPanel;
     private JComboBox<String> sortDropDown;
@@ -45,16 +46,16 @@ public class EventListPanel extends JPanel {
         sortDropDown.addActionListener(e -> {
             switch (sortDropDown.getSelectedItem().toString()) {
                 case "ALPHABETICAL":
-                    events.sort(Comparator.comparing(Event::getName));
+                    setSortStrategy(new AlphabeticalSort());
                     break;
                 case "DATE":
-                    events.sort(Comparator.comparing(Event::getDateTime));
+                    setSortStrategy(new DateSort());
                     break;
                 case "REVERSE_ALPHABETICAL":
-                    events.sort(Comparator.comparing(Event::getName).reversed());
+                    setSortStrategy(new ReverseAlphabeticalSort());
                     break;
                 case "REVERSE_DATE":
-                    events.sort(Comparator.comparing(Event::getDateTime).reversed());
+                    setSortStrategy(new ReverseDateSort());
                     break;
             }
             updateDisplay();
@@ -88,6 +89,10 @@ public class EventListPanel extends JPanel {
         this.add(displayPanel);
 
     }
+    // Function to update the SortStrategy
+    public void setSortStrategy(SortStrategy strategy) {
+        sortStrategy = strategy;
+    }
     //Adds an event to the ArrayList and then calls updateDisplay()
     public void addEvent(Event event) {
         events.add(event);
@@ -120,6 +125,7 @@ public class EventListPanel extends JPanel {
         return false;
     }
     public void updateDisplay() {
+        events.sort(sortStrategy.getComparator());
         displayPanel.removeAll();
         for (Event event : events) {
             if (!isFiltered(event)) {
