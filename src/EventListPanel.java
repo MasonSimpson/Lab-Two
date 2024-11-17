@@ -132,3 +132,34 @@ public class EventListPanel extends JPanel {
         repaint();
     }
 }
+
+// Alphabetical sorting strategy: sorts events by names in ascending order
+class AlphabeticalSort implements SortStrategy {
+    public Comparator<Event> getComparator() {
+        return Comparator.comparing(Event::getName);
+    }
+}
+
+// Date sorting strategy: sorts events by their dates in ascending order
+class DateSort implements SortStrategy {
+    public Comparator<Event> getComparator() {
+        return Comparator.comparing(Event::getDateTime);
+    }
+}
+
+// Reverse alphabetical sorting strategy: sorts events by their names in descending order
+class ReverseAlphabeticalSort implements SortStrategy {
+    public Comparator<Event> getComparator() {
+        return Comparator.comparing(Event::getName).reversed();
+    }
+}
+
+// Reverse date sorting strategy: sorts event by their dates in descending order
+class ReverseDateSort implements SortStrategy {
+    public Comparator<Event> getComparator() {
+        return Comparator.comparing(Event::getDateTime).reversed();
+    }
+}
+
+
+
