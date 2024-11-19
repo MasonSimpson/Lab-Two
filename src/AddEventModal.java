@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 
 public class AddEventModal extends JDialog {
     //Private variable declaration
+    private EventFactory eventFactory = new EventFactory();
     private EventListPanel eventListPanel;
     private AddEventModal modal;
     private record Attribute(String name, JComponent value){}
@@ -122,9 +123,9 @@ public class AddEventModal extends JDialog {
             //Create event based on selected type
             Event newEvent;
             if (eventTypeComboBox.getSelectedIndex() == 0) { // Meeting
-                newEvent = new Meeting(name, startDateTime, endDateTime, location);
+                newEvent = eventFactory.createEvent(eventTypes[0], name, location, startDateTime, endDateTime);
             } else { //Deadline
-                newEvent = new Deadline(name, deadlineDateTime);
+                newEvent = eventFactory.createEvent(eventTypes[1], name, null, deadlineDateTime);
             }
 
             //Add the new event to the event list panel
